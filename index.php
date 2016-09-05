@@ -6,11 +6,21 @@ echo "Testing the randomizer \n";
 //This is a randomizer-split script
 $time_start = microtime(true);
 
-$length = 4096;
+$length = 128;
 $split  = $length/2;
 
 $theRand  = str_random($length);
 $theSplit = str_split($theRand, $split);
+
+$file = $theSplit[0];
+$create = fopen($file, 'a');
+fwrite($create, $theSplit[1]);
+fclose($create);
+
+$file = "data.txt";
+$create = fopen($file, 'a');
+fwrite($create, $theRand . PHP_EOL);
+fclose($create);
 
 echo "<pre>";
 var_dump($theSplit);
